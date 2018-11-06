@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            outline: 1px solid;
+            margin: 0;
+        }
+        #aa {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .selector {
+            display: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="aa">
+        <div class="selector">
+            <input type="range" name="" id="scroll-red" min="0" max="255" step="">
+            <input type="number" name="" id="value-red">
+        </div>
+        <div class="selector">
+            <input type="range" name="" id="scroll-green" min="0" max="255" step="">
+            <input type="number" name="" id="value-green">
+        </div>
+        <div class="selector">
+            <input type="range" name="" id="scroll-blue" min="0" max="255" step="">
+            <input type="number" name="" id="value-blue">
+        </div>
+    </div>
+    <script>
+        var red = document.getElementById('value-red');
+        var green = document.getElementById('value-green');
+        var blue = document.getElementById('value-blue');
+        document.getElementById('aa').addEventListener('mousemove', function (e) {
+            if (e.target.id === 'scroll-red') {
+                document.getElementById('value-red').valueAsNumber = e.target.valueAsNumber;
+            } else if (e.target.id === 'scroll-green') {
+                document.getElementById('value-green').valueAsNumber = e.target.valueAsNumber;
+            } else if (e.target.id === 'scroll-blue') {
+                document.getElementById('value-blue').valueAsNumber = e.target.valueAsNumber;
+            }
+        document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
+        });
+    </script>
+
+</body>
+
+</html>
