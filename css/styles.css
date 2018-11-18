@@ -1,0 +1,146 @@
+* {
+    /* outline: 1px solid; */
+    margin: 0;
+}
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'NTR', sans-serif;
+}
+.container {
+    display: grid;
+    grid-template-areas: "a c"
+                         "b c";
+    grid-template-columns: 3fr 2fr;
+}
+.class-set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#aa {
+    grid-area: a;
+}
+h1 {
+    font-family: 'Capriola', sans-serif;
+}
+#selector-wrapper {
+    display: inherit;
+    flex-direction: column;
+    align-items: center;
+}
+.selector {
+    display: inherit;
+    align-items: inherit;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.left {
+    transform: rotate(180deg);
+}
+.arrow {
+    margin: 0 0.25em;
+    cursor: pointer;
+}
+.arrow:hover {
+
+}
+.input-number {
+    border: 0;
+    border-bottom: 1px solid;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.input-number:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#bb {
+    grid-area: b;
+}
+#bb p {
+    height: 1em;
+}
+#cc {
+    grid-area: c;
+    height: 100vh;
+}
+#color-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.25em;
+    overflow: auto;
+    height: 95vh;
+}
+#color-wrapper-title {
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+.holder {
+    display: flex;
+    align-items: center;
+    background-color: #eee;
+    border-radius: 0.25em;
+    padding: 0.25em;
+    cursor: pointer;
+}
+.holder:hover {
+    background-color: #aaa;
+}
+.holder > span {
+    pointer-events: none;
+}
+.color-example {
+    width: 1em;
+    height: 1em;
+    margin-right: 0.25em;
+    outline: 1px solid;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        grid-template-areas: 'a' 'b' 'c';
+        grid-template-rows: 4fr 1fr;
+        grid-template-columns: auto;
+        height: 100vh;
+        width: 100vw;
+    }
+    .class-set {
+        width: inherit;
+    }
+    #selector-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 33.33%);
+        width: inherit;
+        height: 100%;
+    }
+    .selector {
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+    }
+    .left {
+        transform: rotate(270deg);
+    }
+    .right {
+        transform: rotate(90deg);
+    }
+    input[type='range'] {
+        transform: rotate(90deg);
+    }
+    .input-number {
+        width: 100%;
+    }
+    #cc {
+        display: none;
+    }
+}
