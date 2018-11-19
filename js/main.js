@@ -706,6 +706,19 @@ var colorList = [{
 }
 ];
 
+var moveListener;
+var downListener;
+var upListener;
+if (document.documentElement.clientWidth < 500) {
+    moveListener = 'touchmove';
+    downListener = 'touchstart';
+    upListener = 'touchend';
+} else {
+    moveListener = 'mousemove';
+    downListener = 'mousedown';
+    upListener = 'mouseup';
+}
+
 var red = document.getElementById('value-red');
 var redScroll = document.getElementById('scroll-red');
 var redSpan = document.getElementById('redSpan');
@@ -855,6 +868,7 @@ function shuffle() {
 
 window.onload = function () {
     shuffle();
+    collapse.checked = false;
 };
 
 document.getElementById('shuffle').addEventListener('click', function () {
@@ -863,7 +877,7 @@ document.getElementById('shuffle').addEventListener('click', function () {
 
 // Scroll Logic
 
-document.getElementById('aa').addEventListener('mousemove', function (e) {
+document.getElementById('aa').addEventListener(moveListener, function (e) {
     if (e.target.id === 'scroll-red') {
         red.valueAsNumber = e.target.valueAsNumber;
         redSpan.textContent = e.target.value;
@@ -887,8 +901,7 @@ document.getElementById('aa').addEventListener('mousemove', function (e) {
 
 var timer = null;
 
-document.getElementById('aa').addEventListener('mousedown', function (e) {
-    var valNum = e.target.parentNode.children[1];
+document.getElementById('aa').addEventListener(downListener, function (e) {
     timer = setInterval(() => {
         if (e.target.parentNode.id === 'red-selector') {
             if (e.target.id === 'red-minus') {
@@ -913,7 +926,7 @@ document.getElementById('aa').addEventListener('mousedown', function (e) {
         namingColor();
     }, 50);
 });
-document.getElementById('aa').addEventListener('mouseup', function () {
+document.getElementById('aa').addEventListener(upListener, function () {
     clearInterval(timer);
 });
 
@@ -977,5 +990,40 @@ colorWrapper.addEventListener('click', function (e) {
             colorName.textContent = colorList[x].name;
 
         }
+    }
+});
+
+// Collapse for mobile
+
+var container = document.querySelector('.container');
+var collapse = document.getElementById('collapse');
+var collapseArrow = document.getElementById('collapse-arrow');
+var colorWrapperTitle = document.getElementById('color-wrapper-title');
+var cc = document.getElementById('cc');
+
+function closePalette() {
+    collapseArrow.removeAttribute('style');
+    container.className = 'container';
+    colorWrapper.className = 'color-wrapper';
+    colorWrapperTitle.removeAttribute('style');
+    cc.removeAttribute('class');
+}
+
+collapse.addEventListener('change', function(e) {
+    if (e.target.checked) {
+        collapseArrow.setAttribute('style', 'transform: rotate(180deg)');
+        container.className = 'container collapsed';
+        colorWrapper.className = 'color-wrapper w-open';
+        colorWrapperTitle.setAttribute('style', 'height: 8%;order: 1;opacity: 1');
+        cc.className = 'open';
+    } else {
+        closePalette();
+    }
+});
+
+colorWrapper.addEventListener('click', function(e) {
+    if (e.target.parentNode.className === 'color-wrapper w-open') {
+        closePalette();
+        collapse.checked = false;
     }
 });
