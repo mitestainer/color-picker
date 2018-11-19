@@ -1,6 +1,6 @@
 * {
-    /* outline: 1px solid; */
     margin: 0;
+    box-sizing: border-box;
 }
 body {
     height: 100vh;
@@ -60,6 +60,9 @@ input[type=number]::-webkit-outer-spin-button {
 .input-number:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
+#shuffle {
+    
+}
 #bb {
     grid-area: b;
 }
@@ -70,12 +73,13 @@ input[type=number]::-webkit-outer-spin-button {
     grid-area: c;
     height: 100vh;
 }
-#color-wrapper {
+.color-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 0.25em;
     overflow: auto;
     height: 95vh;
+    padding: 0.25em;
 }
 #color-wrapper-title {
     height: 5vh;
@@ -104,11 +108,17 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right: 0.25em;
     outline: 1px solid;
 }
+#dd {
+    display: none;
+}
+input[type='checkbox'] {
+    display: none;
+}
 
 @media screen and (max-width: 500px) {
     .container {
         grid-template-areas: 'a' 'b' 'c';
-        grid-template-rows: 4fr 1fr;
+        grid-template-rows: 77% 15% 8%;
         grid-template-columns: auto;
         height: 100vh;
         width: 100vw;
@@ -141,6 +151,54 @@ input[type=number]::-webkit-outer-spin-button {
         width: 100%;
     }
     #cc {
+        height: unset;
+        display: flex;
+        flex-direction: column;
+    }
+    .color-wrapper {
         display: none;
+    }
+    #color-wrapper-title {
+        height: 100%;
+        padding: 0.15em;
+        justify-content: flex-end;
+        opacity: 0.5;
+    }
+    #color-wrapper-title > p {
+        display: none;
+    }
+    #dd {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    label[for='collapse'] {
+        border: 1px solid;
+        height: 100%;
+        display: inherit;
+        align-items: center;
+        justify-content: space-around;
+        width: 3.5em;
+        font-size: 1.5em;
+        color: #666;
+    }
+    .collapsed {
+        grid-template-areas: 'c';
+        grid-template-rows: 100%;
+    }
+    #dd-content {
+        display: inherit;
+    }
+    #collapse-arrow {
+        transition: transform 250ms;
+        font-size: 1em;
+    }
+    .open {
+        width: 100vw;
+    }
+    .w-open {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(135px,1fr));
+        height: 92%;
     }
 }
