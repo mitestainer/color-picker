@@ -706,6 +706,8 @@ var colorList = [{
 }
 ];
 
+// Fixer
+
 var moveListener;
 var downListener;
 var upListener;
@@ -718,6 +720,8 @@ if (document.documentElement.clientWidth < 500) {
     downListener = 'mousedown';
     upListener = 'mouseup';
 }
+
+// Variables
 
 var red = document.getElementById('value-red');
 var redScroll = document.getElementById('scroll-red');
@@ -733,6 +737,20 @@ var blueSpan = document.getElementById('blueSpan');
 var colorHex = document.getElementById('colorHex');
 var blueConv = document.getElementById('blue-conv');
 var colorName = document.getElementById('colorName');
+
+// Set font color
+function setFontColor() {
+    var thisRed = Math.abs(red.value - 255);
+    var thisGreen = Math.abs(green.value - 255);
+    var thisBlue = Math.abs(blue.value - 255);
+    var thisColor = 'rgb(' + thisRed + ', ' + thisGreen + ', ' + thisBlue + ')';
+    document.querySelector('body').style.color = thisColor;     
+    document.getElementById('dd').style.color = thisColor;
+    for (var x = 0; x < document.querySelectorAll('.holder').length; x++) {
+        document.querySelectorAll('.holder')[x].style.backgroundColor = 'rgba(' + thisRed + ', ' + thisGreen + ', ' + thisBlue + ', 0.4)';
+    }
+    document.getElementById('shuffle').style.color = thisColor;
+}
 
 // Convert rgb to hex
 
@@ -862,6 +880,7 @@ function shuffle() {
     blueSpan.textContent = blue.value;
     blueScroll.value = blue.value;
     blueConv.textContent = fixer(blue.valueAsNumber);
+    setFontColor();
     namingColor();
     document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
 }
@@ -869,6 +888,7 @@ function shuffle() {
 window.onload = function () {
     shuffle();
     collapse.checked = false;
+    setFontColor();
 };
 
 document.getElementById('shuffle').addEventListener('click', function () {
@@ -893,6 +913,7 @@ document.getElementById('aa').addEventListener(moveListener, function (e) {
     }
     document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
     if (e.target.id === 'scroll-red' || e.target.id === 'scroll-green' || e.target.id === 'scroll-blue') {
+        setFontColor();
         namingColor();
     }
 });
@@ -922,8 +943,9 @@ document.getElementById('aa').addEventListener(downListener, function (e) {
                 setValuePlus('blue');
             }
         }
-        document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
+        setFontColor();
         namingColor();
+        document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
     }, 50);
 });
 document.getElementById('aa').addEventListener(upListener, function () {
@@ -945,8 +967,9 @@ document.getElementById('aa').addEventListener('input', function (e) {
     } else if (e.target.id === 'value-blue') {
         updateValues('blue');
     }
-    document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
+    setFontColor();
     namingColor();
+    document.querySelector('body').style.backgroundColor = 'rgb(' + red.value + ', ' + green.value + ', ' + blue.value + ')';
 });
 document.getElementById('aa').addEventListener("keypress", function (e) {
     if (e.which != 0 && e.which != 8 && e.which < 48 || e.which > 57) {
@@ -988,8 +1011,8 @@ colorWrapper.addEventListener('click', function (e) {
             blueSpan.textContent = colorList[x].blue;
             blueConv.textContent = fixer(colorList[x].blue);
             colorName.textContent = colorList[x].name;
-
         }
+        setFontColor();
     }
 });
 
