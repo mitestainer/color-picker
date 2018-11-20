@@ -55,9 +55,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0 0.5em;
     cursor: pointer;
     font-size: 2em;
+    opacity: 0.8;
 }
 .arrow:hover {
-    
+    opacity: 1;
 }
 .id-span {
     font-size: 1.5em;
@@ -134,6 +135,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: 1em;
     margin-right: 0.25em;
     outline: 1px solid;
+    pointer-events: none;
 }
 #dd {
     display: none;
@@ -142,7 +144,7 @@ input[type='checkbox'] {
     display: none;
 }
 
-/* Range styles */
+/* Range styles (thanks to range.css)*/
 
 input[type=range] {
     -webkit-appearance: none;
@@ -230,6 +232,57 @@ input[type=range] {
     background: rgba(20, 20, 20, 0.2);
   }
   
+@media screen and (max-width: 850px) {
+    .container {
+        grid-template-areas: 'a c' 'b c';
+        grid-template-columns: 90% 10%;
+    }
+    .collapsed {
+        grid-template-areas: 'c c';
+        grid-template-columns: 100vw;
+    }
+    #cc {
+        display: grid;
+    }
+    .color-wrapper {
+        display: none;
+    }
+    #color-wrapper-title {
+        height: 100%;
+        align-items: flex-start;
+        width: 100%;
+        padding: 0.15em;
+    }
+    #color-wrapper-title > p {
+        display: none;
+    }
+    label[for='collapse'] {
+        border: 1px solid;
+        width: 100%;
+        display: inherit;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 1.5em;
+    }
+    .open {
+        grid-template-columns: 90% 10%;
+    }
+    .w-open {
+        display: grid;
+        height: 100%;
+    }
+    #dd {
+        display: flex;
+        width: 100%;
+    }
+    #dd-content {
+        order: 1;
+    }
+    #collapse-arrow {
+        
+    }
+}
 
 @media screen and (max-width: 500px) {
     .container {
@@ -248,6 +301,7 @@ input[type=range] {
         width: 100%;
         height: 100%;
         margin-bottom: 0.5em;
+        grid-template-rows: 1fr;
     }
     .selector {
         flex-direction: column;
@@ -264,36 +318,28 @@ input[type=range] {
     input[type='range'] {
         transform: rotate(90deg);
     }
+    #bb {
+        justify-content: flex-start;
+        font-size: 1.25em;
+    }
     #cc {
         height: unset;
-        display: flex;
         flex-direction: column;
-    }
-    .color-wrapper {
-        display: none;
+        display: flex;
     }
     #color-wrapper-title {
-        height: 100%;
-        padding: 0.15em;
         justify-content: flex-end;
-        opacity: 0.5;
-    }
-    #color-wrapper-title > p {
-        display: none;
+        background-color: rgba(255, 255, 255, 0.5);
     }
     #dd {
-        display: flex;
         align-items: center;
         height: 100%;
+        width: unset;
     }
     label[for='collapse'] {
-        border: 1px solid;
         height: 100%;
-        display: inherit;
-        align-items: center;
-        justify-content: space-around;
         width: 3.5em;
-        font-size: 1.5em;
+        flex-direction: row;
     }
     .collapsed {
         grid-template-areas: 'c';
@@ -301,6 +347,7 @@ input[type=range] {
     }
     #dd-content {
         display: inherit;
+        order: 0;
     }
     #collapse-arrow {
         transition: transform 250ms;
