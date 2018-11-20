@@ -744,7 +744,7 @@ function setFontColor() {
     var thisGreen = Math.abs(green.value - 255);
     var thisBlue = Math.abs(blue.value - 255);
     var thisColor = 'rgb(' + thisRed + ', ' + thisGreen + ', ' + thisBlue + ')';
-    document.querySelector('body').style.color = thisColor;     
+    document.querySelector('body').style.color = thisColor;
     document.getElementById('dd').style.color = thisColor;
     for (var x = 0; x < document.querySelectorAll('.holder').length; x++) {
         document.querySelectorAll('.holder')[x].style.backgroundColor = 'rgba(' + thisRed + ', ' + thisGreen + ', ' + thisBlue + ', 0.4)';
@@ -1024,27 +1024,44 @@ var collapseArrow = document.getElementById('collapse-arrow');
 var colorWrapperTitle = document.getElementById('color-wrapper-title');
 var cc = document.getElementById('cc');
 
+// document.documentElement.clientWidth.addEventListener('change', function (e) {
+if (document.documentElement.clientWidth < 500) {
+    collapseArrow.className = 'fas fa-angle-up';
+} else if (document.documentElement.clientWidth < 850 && document.documentElement.clientWidth > 500) {
+    collapseArrow.className = 'fas fa-angle-left';
+}
+// })
+
 function closePalette() {
-    collapseArrow.removeAttribute('style');
     container.className = 'container';
+    cc.removeAttribute('class');
     colorWrapper.className = 'color-wrapper';
     colorWrapperTitle.removeAttribute('style');
-    cc.removeAttribute('class');
+    if (document.documentElement.clientWidth < 500) {
+        collapseArrow.className = 'fas fa-angle-up';
+    } else if (document.documentElement.clientWidth < 850 && document.documentElement.clientWidth > 500) {
+        collapseArrow.className = 'fas fa-angle-left';
+    }
 }
 
-collapse.addEventListener('change', function(e) {
+collapse.addEventListener('change', function (e) {
     if (e.target.checked) {
-        collapseArrow.setAttribute('style', 'transform: rotate(180deg)');
         container.className = 'container collapsed';
-        colorWrapper.className = 'color-wrapper w-open';
-        colorWrapperTitle.setAttribute('style', 'height: 8%;order: 1;opacity: 1');
         cc.className = 'open';
+        collapseArrow.className = 'fas fa-times';
+        if (document.documentElement.clientWidth < 500) {
+            colorWrapper.className = 'color-wrapper w-open';
+            colorWrapperTitle.setAttribute('style', 'height: 8%;order: 1;opacity: 1');
+        } else if (document.documentElement.clientWidth < 850 && document.documentElement.clientWidth > 500) {
+            colorWrapper.className = 'color-wrapper w-open';
+            colorWrapperTitle.setAttribute('style', 'order: 1;opacity: 1');
+        }
     } else {
         closePalette();
     }
 });
 
-colorWrapper.addEventListener('click', function(e) {
+colorWrapper.addEventListener('click', function (e) {
     if (e.target.parentNode.className === 'color-wrapper w-open') {
         closePalette();
         collapse.checked = false;
